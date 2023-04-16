@@ -81,21 +81,27 @@ while run:
         if retour_button.afficher(screen) == True:
 
             SYSTEM_STATE = 'main'
+            COURS_STATE = None
 
 
         if COURS_STATE == 'and':
 
-            if com.Keyboard.pressed(a_button) and com.Keyboard.pressed(b_button):
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_a] and keys[pygame.K_b]:
                 print("OK")
 
-            if com.Keyboard.pressed(a_button) == True:
+            if keys[pygame.K_a]:
 
-                a_button_pressed.afficher()
+                a_button_pressed.afficher(screen)
+
+            if keys[pygame.K_b]:
+
+                b_button_pressed.afficher(screen)
+
+            a_button.afficher(screen)
    
-
-            if b_button.afficher(screen) == True:
-
-                b_button_pressed.afficher()  
+            b_button.afficher(screen)
 
 
     if SYSTEM_STATE == 'circuit':
