@@ -56,6 +56,11 @@ b_button = misc.Bouton(350, 500, b_button_img, 1)
 b_button_pressed_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
 b_button_pressed = misc.Bouton(350, 500, b_button_pressed_img, 1)
 
+fleche_de_droite_button_img = com.Affichage.chargementFichier('./graphics/buttons/cours_buttons/fleche-droite.png')
+fleche_de_droite_button = misc.Bouton(1180, 360, fleche_de_droite_button_img, 0.1)
+
+fleche_de_gauche_button_img = com.Affichage.chargementFichier('./graphics/buttons/cours_buttons/fleche-gauche.png')
+fleche_de_gauche_button = misc.Bouton(100, 360, fleche_de_gauche_button_img, 0.1)
 
 
 #-----------------------------[ Game Loop ]------------------
@@ -122,6 +127,10 @@ while run:
    
             b_button.afficher(screen)
 
+            if fleche_de_droite_button.afficher(screen) == True:
+
+                COURS_STATE = 'or'
+
     # Onglet "or"
 
         if COURS_STATE == 'or':
@@ -144,6 +153,10 @@ while run:
             a_button.afficher(screen)
    
             b_button.afficher(screen)
+
+            if fleche_de_gauche_button.afficher(screen) == True:
+
+                COURS_STATE = 'and'
 
     # Menu circuit
 
