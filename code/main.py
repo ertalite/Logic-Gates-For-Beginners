@@ -62,6 +62,8 @@ fleche_de_droite_button = misc.Bouton(1180, 360, fleche_de_droite_button_img, 0.
 fleche_de_gauche_button_img = com.Affichage.chargementFichier('./graphics/buttons/cours_buttons/fleche-gauche.png')
 fleche_de_gauche_button = misc.Bouton(100, 360, fleche_de_gauche_button_img, 0.1)
 
+# Portes logiques
+
 
 #-----------------------------[ Game Loop ]------------------
 
@@ -109,6 +111,7 @@ while run:
         if COURS_STATE == 'and':
 
             com.Affichage.afficher(screen, and_surface, and_rectangle)
+            com.Collision.dessinerRectangle()
 
             keys = pygame.key.get_pressed()
 
