@@ -22,11 +22,32 @@ Nexa = com.Affichage.chargementPolice('./font/Nexa-Heavy.ttf', 30)
 title_surface = com.Affichage.creerTexte(Nexa, 'Apprends les portes logiques !', True, 'black')
 title_rectangle = com.Collision.creerRectangle(title_surface, 'center', (640, 160))
 
+cours_surface = com.Affichage.creerTexte(Nexa, 'Les portes logiques c est quoi ?', True, 'black')
+cours_rectangle = com.Collision.creerRectangle(cours_surface, 'center', (640, 160))
+
+cours_contenu_surface = com.Affichage.creerTexte(Nexa, 'Une porte logique (gate) est un circuit électronique réalisant des opérations logiques (booléennes) sur une séquence de bits. Cette séquence est donnée par un signal d"'"entrée modulé en créneau (signal carré), et cadencé de façon précise par un circuit d'horloge, ou quartz. Les opérations logiques sont réalisées électriquement par une combinaison de bascules ou inverseurs, à base de transistors. Étant donné les capacités d"'"intégration en électronique, un circuit intégré comporte généralement plusieurs portes à la fois4.', True, 'black')
+cours_contenu_rectangle = com.Collision.creerRectangle(cours_contenu_surface, 'center', (640, 260))
+
 and_surface = com.Affichage.creerTexte(Nexa, 'AND', True, 'black')
 and_rectangle = com.Collision.creerRectangle(and_surface, 'center', (640, 160))
 
 or_surface = com.Affichage.creerTexte(Nexa, 'OR', True, 'black')
 or_rectangle = com.Collision.creerRectangle(or_surface, 'center', (640, 160))
+
+not_surface = com.Affichage.creerTexte(Nexa, 'NOT', True, 'black')
+not_rectangle = com.Collision.creerRectangle(not_surface, 'center', (640, 160))
+
+xor_surface = com.Affichage.creerTexte(Nexa, 'XOR', True, 'black')
+xor_rectangle = com.Collision.creerRectangle(xor_surface, 'center', (640, 160))
+
+nand_surface = com.Affichage.creerTexte(Nexa, 'NAND', True, 'black')
+nand_rectangle = com.Collision.creerRectangle(nand_surface, 'center', (640, 160))
+
+nor_surface = com.Affichage.creerTexte(Nexa, 'NOR', True, 'black')
+nor_rectangle = com.Collision.creerRectangle(nor_surface, 'center', (640, 160))
+
+xnor_surface = com.Affichage.creerTexte(Nexa, 'XNOR', True, 'black')
+xnor_rectangle = com.Collision.creerRectangle(xnor_surface, 'center', (640, 160))
 
 # Boutons de menu
 
@@ -40,7 +61,7 @@ quitter_img = com.Affichage.chargementFichier('./graphics/buttons/menu_buttons/b
 quitter_button = misc.Bouton(640, 500, quitter_img, 1)
 
 retour_img = com.Affichage.chargementFichier('./graphics/buttons/menu_buttons/button_retour.png')
-retour_button = misc.Bouton(200, 100, retour_img, 1)
+retour_button = misc.Bouton(150, 620, retour_img, 1)
 
 # Boutons de circuit
 
@@ -68,7 +89,7 @@ fleche_de_gauche_button = misc.Bouton(100, 360, fleche_de_gauche_button_img, 0.1
 #-----------------------------[ Game Loop ]------------------
 
 SYSTEM_STATE ='main' #Initialisation du menu principal au démarage du programme
-COURS_STATE = 'and' #Initalisation du menu "cours" sur la page "and"
+COURS_STATE = 'cours_un' #Initalisation du menu "cours" sur la page "cours_un"
 
 run = True 
 while run:
@@ -104,41 +125,133 @@ while run:
         if retour_button.afficher(screen) == True:
 
             SYSTEM_STATE = 'main'
-            COURS_STATE = None
+            COURS_STATE = 'cours_un'
+
+    # Onglet "cours_un"
+
+        if COURS_STATE == 'cours_un':
+
+            com.Affichage.afficher(screen, cours_surface, cours_rectangle)
+            com.Affichage.afficher(screen, cours_contenu_surface, cours_contenu_rectangle)
+
+            if fleche_de_droite_button.afficher(screen) == True:
+
+                COURS_STATE = 'and'
 
     # Onglet "and"
 
         if COURS_STATE == 'and':
 
             com.Affichage.afficher(screen, and_surface, and_rectangle)
-            com.Collision.dessinerRectangle()
+            #com.Collision.dessinerRectangle()          #Erreur ici, manque argument
 
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
-                print("OK")
+                  print("OK")
 
             if keys[pygame.K_a]:
 
-                a_button_pressed.afficher(screen)
+                a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
+                a_button = misc.Bouton(350, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
 
-                b_button_pressed.afficher(screen)
+                b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
+                b_button = misc.Bouton(350, 500, b_button_img, 1)
 
             a_button.afficher(screen)
    
             b_button.afficher(screen)
 
+            if fleche_de_gauche_button.afficher(screen) == True:
+
+                COURS_STATE = 'cours_un'
+
             if fleche_de_droite_button.afficher(screen) == True:
 
                 COURS_STATE = 'or'
+
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(350, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(350, 500, b_button_img, 1)
 
     # Onglet "or"
 
         if COURS_STATE == 'or':
 
             com.Affichage.afficher(screen, or_surface, or_rectangle)
+
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_a] or keys[pygame.K_b]:
+                print("OK")
+
+            if keys[pygame.K_a]:
+
+                a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
+                a_button = misc.Bouton(350, 300, a_button_img, 1)
+
+            if keys[pygame.K_b]:
+
+                b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
+                b_button = misc.Bouton(350, 500, b_button_img, 1)
+
+            a_button.afficher(screen)
+   
+            b_button.afficher(screen)
+
+            if fleche_de_gauche_button.afficher(screen) == True:
+
+                COURS_STATE = 'and'
+
+            if fleche_de_droite_button.afficher(screen) == True:
+
+                COURS_STATE = 'not'
+
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(350, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(350, 500, b_button_img, 1)
+
+    # Onglet "not"
+
+        if COURS_STATE == 'not':
+
+            com.Affichage.afficher(screen, not_surface, not_rectangle)
+
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_a]:
+
+                a_button_pressed.afficher(screen)
+                print("B")
+
+            if keys[pygame.K_b]:
+
+                b_button_pressed.afficher(screen)
+                print("A")
+
+            a_button.afficher(screen)
+   
+            b_button.afficher(screen)
+
+            if fleche_de_gauche_button.afficher(screen) == True:
+
+                COURS_STATE = 'or'
+
+            if fleche_de_droite_button.afficher(screen) == True:
+
+                COURS_STATE = 'xor'
+
+    # Onglet "xor"
+
+        if COURS_STATE == 'xor':
+
+            com.Affichage.afficher(screen, xor_surface, xor_rectangle)
 
             keys = pygame.key.get_pressed()
 
@@ -159,7 +272,100 @@ while run:
 
             if fleche_de_gauche_button.afficher(screen) == True:
 
-                COURS_STATE = 'and'
+                COURS_STATE = 'not'
+
+            if fleche_de_droite_button.afficher(screen) == True:
+
+                COURS_STATE = 'nand'
+
+    # Onglet "nand"
+
+        if COURS_STATE == 'nand':
+
+            com.Affichage.afficher(screen, nand_surface, nand_rectangle)
+
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_a] and keys[pygame.K_b]:
+                print("OK")
+
+            if keys[pygame.K_a]:
+
+                a_button_pressed.afficher(screen)
+
+            if keys[pygame.K_b]:
+
+                b_button_pressed.afficher(screen)
+
+            a_button.afficher(screen)
+   
+            b_button.afficher(screen)
+
+            if fleche_de_gauche_button.afficher(screen) == True:
+
+                COURS_STATE = 'xor'
+
+            if fleche_de_droite_button.afficher(screen) == True:
+
+                COURS_STATE = 'nor'
+
+        # Onglet "nor"
+
+        if COURS_STATE == 'nor':
+
+            com.Affichage.afficher(screen, nor_surface, nor_rectangle)
+
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_a] and keys[pygame.K_b]:
+                print("OK")
+
+            if keys[pygame.K_a]:
+
+                a_button_pressed.afficher(screen)
+
+            if keys[pygame.K_b]:
+
+                b_button_pressed.afficher(screen)
+
+            a_button.afficher(screen)
+   
+            b_button.afficher(screen)
+
+            if fleche_de_gauche_button.afficher(screen) == True:
+
+                COURS_STATE = 'nand'
+
+            if fleche_de_droite_button.afficher(screen) == True:
+
+                COURS_STATE = 'xnor'
+
+         # Onglet "xnor"
+
+        if COURS_STATE == 'xnor':
+
+            com.Affichage.afficher(screen, xnor_surface, xnor_rectangle)
+
+            keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_a] and keys[pygame.K_b]:
+                print("OK")
+
+            if keys[pygame.K_a]:
+
+                a_button_pressed.afficher(screen)
+
+            if keys[pygame.K_b]:
+
+                b_button_pressed.afficher(screen)
+
+            a_button.afficher(screen)
+   
+            b_button.afficher(screen)
+
+            if fleche_de_gauche_button.afficher(screen) == True:
+
+                COURS_STATE = 'nor'
 
     # Menu circuit
 
