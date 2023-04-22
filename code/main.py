@@ -93,13 +93,6 @@ COURS_STATE = 'cours_un' #Initalisation du menu "cours" sur la page "cours_un"
 
 run = True 
 while run:
-    
-    for event in pygame.event.get():
-
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-
 
     com.Affichage.afficher(screen, main_menu_surface, (0, 0)) #Affichage du fond 
 
@@ -110,9 +103,11 @@ while run:
         com.Affichage.afficher(screen, title_surface, title_rectangle)
 
         if cours_button.afficher(screen) == True:
+            
             SYSTEM_STATE = 'cours'
 
         if circuit_button.afficher(screen) == True:
+            
             SYSTEM_STATE = 'circuit'
 
         if quitter_button.afficher(screen) == True:
@@ -203,13 +198,15 @@ while run:
    
             b_button.afficher(screen)
 
-            if fleche_de_gauche_button.afficher(screen) == True:
+            if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'and'
+                clicked = True
 
-            if fleche_de_droite_button.afficher(screen) == True:
+            if fleche_de_droite_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'not'
+                clicked = True
 
             a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
             a_button = misc.Bouton(350, 300, a_button_img, 1)
@@ -239,13 +236,15 @@ while run:
    
             b_button.afficher(screen)
 
-            if fleche_de_gauche_button.afficher(screen) == True:
+            if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'or'
+                clicked = True
 
-            if fleche_de_droite_button.afficher(screen) == True:
+            if fleche_de_droite_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'xor'
+                clicked = True
 
     # Onglet "xor"
 
@@ -270,13 +269,15 @@ while run:
    
             b_button.afficher(screen)
 
-            if fleche_de_gauche_button.afficher(screen) == True:
+            if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'not'
+                clicked = True
 
-            if fleche_de_droite_button.afficher(screen) == True:
+            if fleche_de_droite_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'nand'
+                clicked = True
 
     # Onglet "nand"
 
@@ -301,13 +302,15 @@ while run:
    
             b_button.afficher(screen)
 
-            if fleche_de_gauche_button.afficher(screen) == True:
+            if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'xor'
+                clicked = True
 
-            if fleche_de_droite_button.afficher(screen) == True:
+            if fleche_de_droite_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'nor'
+                clicked = True
 
         # Onglet "nor"
 
@@ -332,13 +335,15 @@ while run:
    
             b_button.afficher(screen)
 
-            if fleche_de_gauche_button.afficher(screen) == True:
+            if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'nand'
+                clicked = True
 
-            if fleche_de_droite_button.afficher(screen) == True:
+            if fleche_de_droite_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'xnor'
+                clicked = True
 
          # Onglet "xnor"
 
@@ -363,19 +368,29 @@ while run:
    
             b_button.afficher(screen)
 
-            if fleche_de_gauche_button.afficher(screen) == True:
+            if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
                 COURS_STATE = 'nor'
+                clicked = True
 
     # Menu circuit
 
     if SYSTEM_STATE == 'circuit':
 
         if retour_button.afficher(screen) == True:
+     
 
             SYSTEM_STATE = 'main'
 
 
+    for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+        if event.type == pygame.MOUSEBUTTONUP:
+            clicked = False
 
     pygame.display.update()
     clock.tick(60)
