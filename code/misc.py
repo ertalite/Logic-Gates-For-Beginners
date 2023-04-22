@@ -11,7 +11,7 @@ class Bouton:
         self.rect.center = (x, y)
         self.clicked = False
 
-    def afficher(self, screen):
+    def afficher(self, surface):
 
         action = False
 
@@ -22,10 +22,11 @@ class Bouton:
                 self.clicked = True
                 action = True
 
-            
-        if pygame.mouse.get_pressed()[0] == 0:
-            self.clicked == False
+        self.clicked = False
 
-        screen.blit(self.image, (self.rect.x, self.rect.y))
+        surface.blit(self.image, (self.rect.x, self.rect.y))
 
+
+        print(self.clicked)
         return action
+    
