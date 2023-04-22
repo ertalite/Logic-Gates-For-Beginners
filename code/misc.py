@@ -26,7 +26,5 @@ class Bouton:
 
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
-
-        print(self.clicked)
         return action
     

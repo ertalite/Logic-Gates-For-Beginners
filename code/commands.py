@@ -21,11 +21,19 @@ class Affichage:
         '''
         return pygame.image.load(str(chemin)).convert_alpha()
 
-    def afficher(screen, surface, pos):
+    def afficher(screen, surface, pos, scale):
         '''
         Affiche une surface sur l'écran.
         '''
         return screen.blit(surface, pos)
+    
+    def redimensionner(objet, scale):
+        '''
+        Redimensionne un objet passé en paramètres.
+        '''
+        width = objet.get_width()
+        height = objet.get_height()
+        return pygame.transform.scale(objet, (int(width * scale), int(height * scale)))
 
 class Collision:
 
@@ -40,6 +48,10 @@ class Collision:
         if direction == 'midbottom':
 
             return surface.get_rect(midbottom = pos)
+        
+        if direction == 'topleft':
+
+            return surface.get_rect(topleft = pos)
 
     def dessinerRectangle(screen, couleur, pos, taille):
         '''
