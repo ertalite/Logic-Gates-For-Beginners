@@ -90,21 +90,27 @@ ANDgate_img = com.Affichage.redimensionner(ANDgate_img, 0.65)
 ANDgate_rectangle = com.Collision.creerRectangle(ANDgate_img, 'center', (640, 370))
 
 NANDgate_img = com.Affichage.chargementFichier('./graphics/gates/NANDgate.png')
+NANDgate_img = com.Affichage.redimensionner(NANDgate_img, 0.55)
 NANDgate_rectangle = com.Collision.creerRectangle(NANDgate_img, 'center', (640, 360))
 
 NORgate_img = com.Affichage.chargementFichier('./graphics/gates/NORgate.png')
+NORgate_img = com.Affichage.redimensionner(NORgate_img, 0.518)
 NORgate_rectangle = com.Collision.creerRectangle(NORgate_img, 'center', (640, 360))
 
 NOTgate_img = com.Affichage.chargementFichier('./graphics/gates/NOTgate.png')
+NOTgate_img = com.Affichage.redimensionner(NOTgate_img, 0.35)
 NOTgate_rectangle = com.Collision.creerRectangle(NOTgate_img, 'center', (640, 360))
 
 ORgate_img = com.Affichage.chargementFichier('./graphics/gates/ORgate.png')
+ORgate_img = com.Affichage.redimensionner(ORgate_img, 0.65)
 ORgate_rectangle = com.Collision.creerRectangle(ORgate_img, 'center', (640, 360))
 
 XNORgate_img = com.Affichage.chargementFichier('./graphics/gates/XNORgate.png')
+XNORgate_img = com.Affichage.redimensionner(XNORgate_img, 0.55)
 XNORgate_rectangle = com.Collision.creerRectangle(XNORgate_img, 'center', (640, 360))
 
 XORgate_img = com.Affichage.chargementFichier('./graphics/gates/XORgate.png')
+XORgate_img = com.Affichage.redimensionner(XORgate_img, 0.325)
 XORgate_rectangle = com.Collision.creerRectangle(XORgate_img, 'center', (640, 360))
 
 # Lumières
@@ -170,14 +176,16 @@ while run:
         if COURS_STATE == 'and':
 
             com.Affichage.afficher(screen, and_surface, and_rectangle, 1)
-            #com.Collision.dessinerRectangle()          #Erreur ici, manque argument
+        
             com.Affichage.afficher(screen, ANDgate_img, ANDgate_rectangle, 1)
-            com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
+
+            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
 
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
-                  print("OK")
+                  
+                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
 
             if keys[pygame.K_a]:
 
@@ -193,6 +201,12 @@ while run:
    
             b_button.afficher(screen)
 
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(280, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(280, 435, b_button_img, 1)
+
             if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
                 clicked = True
                 COURS_STATE = 'cours_un'
@@ -201,36 +215,41 @@ while run:
                 clicked = True
                 COURS_STATE = 'or'
 
-            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
-            a_button = misc.Bouton(280, 300, a_button_img, 1)
-
-            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
-            b_button = misc.Bouton(280, 435, b_button_img, 1)
-
     # Onglet "or"
 
         if COURS_STATE == 'or':
 
             com.Affichage.afficher(screen, or_surface, or_rectangle, 1)
 
+            com.Affichage.afficher(screen, ORgate_img, ORgate_rectangle, 1)
+
+            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] or keys[pygame.K_b]:
-                print("OK")
+                  
+                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
 
             if keys[pygame.K_a]:
 
                 a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
-                a_button = misc.Bouton(350, 300, a_button_img, 1)
+                a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
 
                 b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
-                b_button = misc.Bouton(350, 500, b_button_img, 1)
+                b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             a_button.afficher(screen)
    
             b_button.afficher(screen)
+
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(280, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
@@ -242,33 +261,41 @@ while run:
                 COURS_STATE = 'not'
                 clicked = True
 
-            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
-            a_button = misc.Bouton(350, 300, a_button_img, 1)
-
-            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
-            b_button = misc.Bouton(350, 500, b_button_img, 1)
-
     # Onglet "not"
 
         if COURS_STATE == 'not':
 
             com.Affichage.afficher(screen, not_surface, not_rectangle, 1)
 
+            com.Affichage.afficher(screen, NOTgate_img, NOTgate_rectangle, 1)
+
+            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+
             keys = pygame.key.get_pressed()
+
+            if keys[pygame.K_a] and keys[pygame.K_b]:
+                  
+                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
 
             if keys[pygame.K_a]:
 
-                a_button_pressed.afficher(screen)
-                print("B")
+                a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
+                a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
 
-                b_button_pressed.afficher(screen)
-                print("A")
+                b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
+                b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             a_button.afficher(screen)
    
             b_button.afficher(screen)
+
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(280, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
@@ -286,22 +313,35 @@ while run:
 
             com.Affichage.afficher(screen, xor_surface, xor_rectangle, 1)
 
+            com.Affichage.afficher(screen, XORgate_img, XORgate_rectangle, 1)
+
+            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
-                print("OK")
+                  
+                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
 
             if keys[pygame.K_a]:
 
-                a_button_pressed.afficher(screen)
+                a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
+                a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
 
-                b_button_pressed.afficher(screen)
+                b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
+                b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             a_button.afficher(screen)
    
             b_button.afficher(screen)
+
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(280, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
@@ -313,28 +353,42 @@ while run:
                 COURS_STATE = 'nand'
                 clicked = True
 
+
     # Onglet "nand"
 
         if COURS_STATE == 'nand':
 
             com.Affichage.afficher(screen, nand_surface, nand_rectangle, 1)
 
+            com.Affichage.afficher(screen, NANDgate_img, NANDgate_rectangle, 1)
+
+            com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
+
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
-                print("OK")
+                  
+                  com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
 
             if keys[pygame.K_a]:
 
-                a_button_pressed.afficher(screen)
+                a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
+                a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
 
-                b_button_pressed.afficher(screen)
+                b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
+                b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             a_button.afficher(screen)
    
             b_button.afficher(screen)
+
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(280, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
@@ -352,22 +406,35 @@ while run:
 
             com.Affichage.afficher(screen, nor_surface, nor_rectangle, 1)
 
+            com.Affichage.afficher(screen, NORgate_img, NORgate_rectangle, 1)
+
+            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
-                print("OK")
+                  
+                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
 
             if keys[pygame.K_a]:
 
-                a_button_pressed.afficher(screen)
+                a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
+                a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
 
-                b_button_pressed.afficher(screen)
+                b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
+                b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             a_button.afficher(screen)
    
             b_button.afficher(screen)
+
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(280, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
@@ -385,22 +452,35 @@ while run:
 
             com.Affichage.afficher(screen, xnor_surface, xnor_rectangle, 1)
 
+            com.Affichage.afficher(screen, XNORgate_img, XNORgate_rectangle, 1)
+
+            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
-                print("OK")
+                  
+                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
 
             if keys[pygame.K_a]:
 
-                a_button_pressed.afficher(screen)
+                a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
+                a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
 
-                b_button_pressed.afficher(screen)
+                b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
+                b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             a_button.afficher(screen)
    
             b_button.afficher(screen)
+
+            a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
+            a_button = misc.Bouton(280, 300, a_button_img, 1)
+
+            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
+            b_button = misc.Bouton(280, 435, b_button_img, 1)
 
             if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
