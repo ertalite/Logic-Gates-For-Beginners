@@ -1,4 +1,5 @@
 import pygame
+import pygame.sprite
 
 class Bouton:
 
@@ -28,3 +29,22 @@ class Bouton:
 
         return action
     
+class Light(pygame.sprite.Sprite):
+
+    def __init__(self, x, y, image_path, scale) -> None:
+
+        super().__init__()
+        self.image = pygame.image.load(image_path).convert_alpha()
+        width = self.image.get_width()
+        height = self.image.get_height()
+        self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
+        self.rectangle = self.image.get_rect()
+        self.rectangle.center = (x, y)
+
+    def afficher(self, surface):
+
+        surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+    def enlever(self):
+
+        self.kill()

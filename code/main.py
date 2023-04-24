@@ -8,6 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption('Les portes logiques')
 clock = pygame.time.Clock()
+pygame.display.set_icon(com.Affichage.chargementFichier('./graphics/lights/light-bulb-on.png'))
 
 #-----------------------------[ Chargement des fichiers ]------------------
 
@@ -52,16 +53,19 @@ xnor_rectangle = com.Collision.creerRectangle(xnor_surface, 'center', (640, 160)
 # Boutons de menu
 
 cours_img = com.Affichage.chargementFichier('./graphics/buttons/menu_buttons/button_cours.png')
-cours_button = misc.Bouton(640, 300, cours_img, 1)
+cours_button = misc.Bouton(640, 280, cours_img, 1)
 
 circuit_img = com.Affichage.chargementFichier('./graphics/buttons/menu_buttons/button_circuit.png')
 circuit_button = misc.Bouton(640, 400, circuit_img, 1)
 
 quitter_img = com.Affichage.chargementFichier('./graphics/buttons/menu_buttons/button_quitter.png')
-quitter_button = misc.Bouton(640, 500, quitter_img, 1)
+quitter_button = misc.Bouton(640, 520, quitter_img, 1)
 
 retour_img = com.Affichage.chargementFichier('./graphics/buttons/menu_buttons/button_retour.png')
 retour_button = misc.Bouton(150, 620, retour_img, 1)
+
+propos_img = com.Affichage.chargementFichier('./graphics/buttons/menu_buttons/button_propos.png')
+propos_button = misc.Bouton(1150, 610, propos_img, 1)
 
 # Boutons de circuit
 
@@ -106,7 +110,7 @@ ORgate_img = com.Affichage.redimensionner(ORgate_img, 0.65)
 ORgate_rectangle = com.Collision.creerRectangle(ORgate_img, 'center', (640, 360))
 
 XNORgate_img = com.Affichage.chargementFichier('./graphics/gates/XNORgate.png')
-XNORgate_img = com.Affichage.redimensionner(XNORgate_img, 0.55)
+XNORgate_img = com.Affichage.redimensionner(XNORgate_img, 0.7)
 XNORgate_rectangle = com.Collision.creerRectangle(XNORgate_img, 'center', (640, 360))
 
 XORgate_img = com.Affichage.chargementFichier('./graphics/gates/XORgate.png')
@@ -115,19 +119,19 @@ XORgate_rectangle = com.Collision.creerRectangle(XORgate_img, 'center', (640, 36
 
 # Lumières
 
-light_on_img = com.Affichage.chargementFichier('./graphics/lights/light-bulb-on.png')
-light_on_img = com.Affichage.redimensionner(light_on_img, 0.1)
-light_on_rectangle = com.Collision.creerRectangle(light_on_img, 'center', (1025, 360))
+light_on = misc.Light(1025, 360,'./graphics/lights/light-bulb-on.png', 0.1)
 
-light_off_img = com.Affichage.chargementFichier('./graphics/lights/light-bulb-off.png')
-light_off_img = com.Affichage.redimensionner(light_off_img, 0.1)
-light_off_rectangle = com.Collision.creerRectangle(light_off_img, 'center', (1025, 360))
+light_off = misc.Light(1025, 360, './graphics/lights/light-bulb-off.png', 0.1)
 
+light_group = pygame.sprite.Group()
+
+light_group.add(light_on, light_off)
 
 #-----------------------------[ Game Loop ]------------------
 
 SYSTEM_STATE ='main' #Initialisation du menu principal au démarage du programme
 COURS_STATE = 'cours_un' #Initalisation du menu "cours" sur la page "cours_un"
+light_bool = True
 
 run = True 
 while run:
@@ -150,6 +154,10 @@ while run:
 
         if quitter_button.afficher(screen) == True:
             run = False
+
+        if propos_button.afficher(screen) == True:
+
+            SYSTEM_STATE = 'propos'
 
 # Menu cours           
 
@@ -179,13 +187,13 @@ while run:
         
             com.Affichage.afficher(screen, ANDgate_img, ANDgate_rectangle, 1)
 
-            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+            light_off.afficher(screen)
 
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
                   
-                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
+                  light_on.afficher(screen)
 
             if keys[pygame.K_a]:
 
@@ -223,13 +231,13 @@ while run:
 
             com.Affichage.afficher(screen, ORgate_img, ORgate_rectangle, 1)
 
-            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+            light_off.afficher(screen)
 
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] or keys[pygame.K_b]:
                   
-                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
+                light_on.afficher(screen)
 
             if keys[pygame.K_a]:
 
@@ -269,33 +277,19 @@ while run:
 
             com.Affichage.afficher(screen, NOTgate_img, NOTgate_rectangle, 1)
 
-            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
-
             keys = pygame.key.get_pressed()
-
-            if keys[pygame.K_a] and keys[pygame.K_b]:
-                  
-                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
 
             if keys[pygame.K_a]:
 
+                light_bool = False
+                light_off.afficher(screen)
                 a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
-                a_button = misc.Bouton(280, 300, a_button_img, 1)
-
-            if keys[pygame.K_b]:
-
-                b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
-                b_button = misc.Bouton(280, 435, b_button_img, 1)
+                a_button = misc.Bouton(280, 360, a_button_img, 1)
 
             a_button.afficher(screen)
-   
-            b_button.afficher(screen)
 
             a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a.png')
-            a_button = misc.Bouton(280, 300, a_button_img, 1)
-
-            b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b.png')
-            b_button = misc.Bouton(280, 435, b_button_img, 1)
+            a_button = misc.Bouton(280, 360, a_button_img, 1)
 
             if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
 
@@ -307,29 +301,39 @@ while run:
                 COURS_STATE = 'xor'
                 clicked = True
 
+            if light_bool:
+
+                light_on.afficher(screen)
+
+            light_bool = True
+
+            
+
     # Onglet "xor"
 
         if COURS_STATE == 'xor':
+
+            light_bool = False
 
             com.Affichage.afficher(screen, xor_surface, xor_rectangle, 1)
 
             com.Affichage.afficher(screen, XORgate_img, XORgate_rectangle, 1)
 
-            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
-
             keys = pygame.key.get_pressed()
 
-            if keys[pygame.K_a] and keys[pygame.K_b]:
-                  
-                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
+            if keys[pygame.K_a] and keys[pygame.K_b]:    
 
+                light_bool = True
+                  
             if keys[pygame.K_a]:
 
+                light_on.afficher(screen)
                 a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
                 a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
 
+                light_on.afficher(screen)
                 b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
                 b_button = misc.Bouton(280, 435, b_button_img, 1)
 
@@ -353,6 +357,12 @@ while run:
                 COURS_STATE = 'nand'
                 clicked = True
 
+            light_bool = True
+
+            if light_bool:
+                
+                light_off.afficher(screen)
+
 
     # Onglet "nand"
 
@@ -362,13 +372,11 @@ while run:
 
             com.Affichage.afficher(screen, NANDgate_img, NANDgate_rectangle, 1)
 
-            com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
-
             keys = pygame.key.get_pressed()
 
-            if keys[pygame.K_a] and keys[pygame.K_b]:
-                  
-                  com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+            if not(keys[pygame.K_a] and keys[pygame.K_b]):
+
+                light_on.afficher(screen)
 
             if keys[pygame.K_a]:
 
@@ -400,6 +408,12 @@ while run:
                 COURS_STATE = 'nor'
                 clicked = True
 
+            light_bool = True
+
+            if light_bool:
+ 
+                light_off.afficher(screen)
+
         # Onglet "nor"
 
         if COURS_STATE == 'nor':
@@ -408,13 +422,12 @@ while run:
 
             com.Affichage.afficher(screen, NORgate_img, NORgate_rectangle, 1)
 
-            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
-
             keys = pygame.key.get_pressed()
 
-            if keys[pygame.K_a] and keys[pygame.K_b]:
+            if not(keys[pygame.K_a] and keys[pygame.K_b]):
                   
-                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
+                light_bool = False
+                light_on.afficher(screen)
 
             if keys[pygame.K_a]:
 
@@ -446,6 +459,12 @@ while run:
                 COURS_STATE = 'xnor'
                 clicked = True
 
+            light_bool = True
+
+            if light_bool:
+
+                light_off.afficher(screen)
+
          # Onglet "xnor"
 
         if COURS_STATE == 'xnor':
@@ -454,13 +473,12 @@ while run:
 
             com.Affichage.afficher(screen, XNORgate_img, XNORgate_rectangle, 1)
 
-            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
-
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
                   
-                  com.Affichage.afficher(screen, light_on_img, light_on_rectangle, 1)
+                light_bool = False
+                light_on.afficher(screen)
 
             if keys[pygame.K_a]:
 
@@ -487,6 +505,12 @@ while run:
                 COURS_STATE = 'nor'
                 clicked = True
 
+            light_bool = True
+
+            if light_bool:
+
+                light_off.afficher(screen)
+
     # Menu circuit
 
     if SYSTEM_STATE == 'circuit':
@@ -495,6 +519,14 @@ while run:
      
 
             SYSTEM_STATE = 'main'
+
+    if SYSTEM_STATE == 'propos':
+
+        if retour_button.afficher(screen) == True:
+     
+
+            SYSTEM_STATE = 'main'
+
 
 
     for event in pygame.event.get():
