@@ -127,11 +127,25 @@ light_group = pygame.sprite.Group()
 
 light_group.add(light_on, light_off)
 
+# Circuit
+
+
+blank_circuit_menu_surface = pygame.Surface([150, 720])
+blank_circuit_menu_surface.fill('white')
+blank_circuit_menu_surface.set_alpha(125)
+
+fleche_gauche_menu_circuit = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/icone-fleche-gauche-grise.png')
+fleche_gauche_menu_circuit = misc.Bouton(1210, 50, fleche_gauche_menu_circuit, 0.2)
+
+fleche_droite_menu_circuit = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/icone-fleche-droite-grise.png')
+fleche_droite_menu_circuit = misc.Bouton(1070, 50, fleche_droite_menu_circuit, 0.2)
+
 #-----------------------------[ Game Loop ]------------------
 
 SYSTEM_STATE ='main' #Initialisation du menu principal au démarage du programme
 COURS_STATE = 'cours_un' #Initalisation du menu "cours" sur la page "cours_un"
 light_bool = True
+fleche_bool = True
 
 run = True 
 while run:
@@ -515,10 +529,27 @@ while run:
 
     if SYSTEM_STATE == 'circuit':
 
+
+        if fleche_bool:
+
+            if fleche_gauche_menu_circuit.afficher(screen) == True:
+
+                fleche_bool = False
+            
+        if not fleche_bool:
+
+            com.Affichage.afficher(screen, blank_circuit_menu_surface, (1130, 0), 1)
+
+            if fleche_droite_menu_circuit.afficher(screen) == True:
+
+                fleche_bool = True
+
+
         if retour_button.afficher(screen) == True:
-     
 
             SYSTEM_STATE = 'main'
+
+    # Menu à propos
 
     if SYSTEM_STATE == 'propos':
 
