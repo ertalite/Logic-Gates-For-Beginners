@@ -12,10 +12,24 @@ class ANDgate(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
         self.rectangle = self.image.get_rect()
         self.rectangle.center = (x, y)
+        self.clicked = False
 
     def afficher(self, surface):
 
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rectangle.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        self.clicked = False
+
         surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+        return action
 
     def enlever(self):
 
@@ -32,10 +46,24 @@ class NANDgate(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
         self.rectangle = self.image.get_rect()
         self.rectangle.center = (x, y)
+        self.clicked = False
 
     def afficher(self, surface):
 
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rectangle.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        self.clicked = False
+
         surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+        return action
 
     def enlever(self):
 
@@ -53,10 +81,24 @@ class NORgate(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
         self.rectangle = self.image.get_rect()
         self.rectangle.center = (x, y)
+        self.clicked = False
 
     def afficher(self, surface):
 
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rectangle.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        self.clicked = False
+
         surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+        return action
 
     def enlever(self):
 
@@ -74,10 +116,24 @@ class NOTgate(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
         self.rectangle = self.image.get_rect()
         self.rectangle.center = (x, y)
+        self.clicked = False
 
     def afficher(self, surface):
 
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rectangle.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        self.clicked = False
+
         surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+        return action
 
     def enlever(self):
 
@@ -96,10 +152,24 @@ class ORgate(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
         self.rectangle = self.image.get_rect()
         self.rectangle.center = (x, y)
+        self.clicked = False
 
     def afficher(self, surface):
 
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rectangle.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        self.clicked = False
+
         surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+        return action
 
     def enlever(self):
 
@@ -118,10 +188,24 @@ class XNORgate(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
         self.rectangle = self.image.get_rect()
         self.rectangle.center = (x, y)
+        self.clicked = False
 
     def afficher(self, surface):
 
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rectangle.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        self.clicked = False
+
         surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+        return action
 
     def enlever(self):
 
@@ -139,10 +223,24 @@ class XORgate(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
         self.rectangle = self.image.get_rect()
         self.rectangle.center = (x, y)
+        self.clicked = False
 
     def afficher(self, surface):
 
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rectangle.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        self.clicked = False
+
         surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+        return action
 
     def enlever(self):
 
@@ -159,10 +257,24 @@ class WIREgate(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
         self.rectangle = self.image.get_rect()
         self.rectangle.center = (x, y)
+        self.clicked = False
 
     def afficher(self, surface):
 
+        action = False
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rectangle.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        self.clicked = False
+
         surface.blit(self.image, (self.rectangle.x, self.rectangle.y))
+
+        return action
 
     def enlever(self):
 

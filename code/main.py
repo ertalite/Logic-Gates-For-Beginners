@@ -6,7 +6,7 @@ import misc, gates
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
-pygame.display.set_caption('Les portes logiques')
+pygame.display.set_caption('Apprends les portes logiques !')
 clock = pygame.time.Clock()
 pygame.display.set_icon(com.Affichage.chargementFichier('./graphics/lights/light-bulb-on.png'))
 
@@ -589,13 +589,20 @@ intégré comporte généralement plusieurs portes à la fois."""
 
             com.Affichage.afficher(screen, blank_circuit_menu_surface, (980, 0), 1)
 
-            ANDgate.afficher(screen)
-            NANDgate.afficher(screen)
-            NORgate.afficher(screen)
-            NOTgate.afficher(screen)
-            ORgate.afficher(screen)
-            XNORgate.afficher(screen)
-            XORgate.afficher(screen)
+            if ANDgate.afficher(screen):
+                ANDgate.rectangle.center = pygame.mouse.get_pos()
+            if NANDgate.afficher(screen):
+                NANDgate.rectangle.center = pygame.mouse.get_pos()
+            if NORgate.afficher(screen):
+                NORgate.rectangle.center = pygame.mouse.get_pos()
+            if NOTgate.afficher(screen):
+                NOTgate.rectangle.center = pygame.mouse.get_pos()
+            if ORgate.afficher(screen):
+                ORgate.rectangle.center = pygame.mouse.get_pos()
+            if XNORgate.afficher(screen):
+                XNORgate.rectangle.center = pygame.mouse.get_pos()
+            if XORgate.afficher(screen):
+                XORgate.rectangle.center = pygame.mouse.get_pos()
 
             if fleche_droite_menu_circuit.afficher(screen) == True:
 
