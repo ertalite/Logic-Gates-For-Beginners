@@ -487,6 +487,26 @@ while run:
                 COURS_STATE = 'nor'
                 clicked = True
 
+            if fleche_de_droite_button.afficher(screen) == True and clicked == False:
+
+                COURS_STATE = 'resume'
+                clicked = True
+
+        # Onglet "resume"
+
+        if COURS_STATE == 'resume':
+
+            com.Affichage.afficher(screen, xnor_surface, xnor_rectangle, 1)
+
+            com.Affichage.afficher(screen, XNORgate_img, XNORgate_rectangle, 1)
+
+            com.Affichage.afficher(screen, light_off_img, light_off_rectangle, 1)
+
+            if fleche_de_gauche_button.afficher(screen) == True and clicked == False:
+
+                COURS_STATE = 'xnor'
+                clicked = True
+
     # Menu circuit
 
     if SYSTEM_STATE == 'circuit':
