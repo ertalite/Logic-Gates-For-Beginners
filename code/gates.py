@@ -3,10 +3,10 @@ import pygame.sprite
 
 class ANDgate(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, image_path, scale) -> None:
+    def __init__(self, x, y, scale) -> None:
 
         super().__init__()
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load('./graphics/gates/ANDgate.png').convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
@@ -23,10 +23,10 @@ class ANDgate(pygame.sprite.Sprite):
 
 class NANDgate(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, image_path, scale) -> None:
+    def __init__(self, x, y, scale) -> None:
 
         super().__init__()
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load('./graphics/gates/NANDgate.png').convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
@@ -44,10 +44,10 @@ class NANDgate(pygame.sprite.Sprite):
 
 class NORgate(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, image_path, scale) -> None:
+    def __init__(self, x, y, scale) -> None:
 
         super().__init__()
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load('./graphics/gates/NORgate.png').convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
@@ -65,10 +65,10 @@ class NORgate(pygame.sprite.Sprite):
 
 class NOTgate(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, image_path, scale) -> None:
+    def __init__(self, x, y, scale) -> None:
 
         super().__init__()
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load('./graphics/gates/NOTgate.png').convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
@@ -87,10 +87,10 @@ class NOTgate(pygame.sprite.Sprite):
 
 class ORgate(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, image_path, scale) -> None:
+    def __init__(self, x, y, scale) -> None:
 
         super().__init__()
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load('./graphics/gates/ORgate.png').convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
@@ -109,10 +109,10 @@ class ORgate(pygame.sprite.Sprite):
 
 class XNORgate(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, image_path, scale) -> None:
+    def __init__(self, x, y, scale) -> None:
 
         super().__init__()
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load('./graphics/gates/XNORgate.png').convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
@@ -130,10 +130,10 @@ class XNORgate(pygame.sprite.Sprite):
 
 class XORgate(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, image_path, scale) -> None:
+    def __init__(self, x, y, scale) -> None:
 
         super().__init__()
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load('./graphics/gates/XORgate.png').convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
@@ -150,10 +150,10 @@ class XORgate(pygame.sprite.Sprite):
 
 class WIREgate(pygame.sprite.Sprite):
 
-    def __init__(self, x, y, image_path, scale) -> None:
+    def __init__(self, x, y, scale) -> None:
 
         super().__init__()
-        self.image = pygame.image.load(image_path).convert_alpha()
+        self.image = pygame.image.load('./graphics/gates/WIREgate.png').convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
@@ -215,6 +215,7 @@ class LIGHTgate(pygame.sprite.Sprite):
 
         super().__init__()
         self.image = pygame.image.load(image_path).convert_alpha()
+        self.image2 = pygame.image.load(image_path).convert_alpha()
         width = self.image.get_width()
         height = self.image.get_height()
         self.image = pygame.transform.scale(self.image, (int(width * scale), int(height * scale)))
