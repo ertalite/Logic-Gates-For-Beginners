@@ -355,23 +355,37 @@ intégré comporte généralement plusieurs portes à la fois."""
 
             com.Affichage.afficher(screen, XORgate_img, XORgate_rectangle, 1)
 
+            light_off.afficher(screen)
+
+            light_bool = False
+
             keys = pygame.key.get_pressed()
 
-            if keys[pygame.K_a] and keys[pygame.K_b]:    
+            if not(keys[pygame.K_a] and keys[pygame.K_b]):    
 
-                light_bool = True
+                light_bool = False
                   
             if keys[pygame.K_a]:
 
-                light_on.afficher(screen)
+                light_bool = True
                 a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
                 a_button = misc.Bouton(280, 300, a_button_img, 1)
 
+                if keys[pygame.K_b]:
+
+                    light_bool = False
+                    light_off.afficher(screen)
+
             if keys[pygame.K_b]:
 
-                light_on.afficher(screen)
+                light_bool = True
                 b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
                 b_button = misc.Bouton(280, 435, b_button_img, 1)
+
+                if keys[pygame.K_a]:
+
+                    light_bool = False
+                    light_off.afficher(screen)
 
             a_button.afficher(screen)
    
@@ -393,11 +407,9 @@ intégré comporte généralement plusieurs portes à la fois."""
                 COURS_STATE = 'nand'
                 clicked = True
 
-            light_bool = True
-
             if light_bool:
                 
-                light_off.afficher(screen)
+                light_on.afficher(screen)
 
 
     # Onglet "nand"
@@ -458,19 +470,27 @@ intégré comporte généralement plusieurs portes à la fois."""
 
             com.Affichage.afficher(screen, NORgate_img, NORgate_rectangle, 1)
 
+            light_bool = True
+
             keys = pygame.key.get_pressed()
 
-            if not(keys[pygame.K_a] and keys[pygame.K_b]):
+            if keys[pygame.K_a] and keys[pygame.K_b]:
                   
                 light_bool = False
-                light_on.afficher(screen)
+                light_off.afficher(screen)
 
             if keys[pygame.K_a]:
+
+                light_bool = False
+                light_off.afficher(screen)
 
                 a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
                 a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
+
+                light_bool = False
+                light_off.afficher(screen)
 
                 b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
                 b_button = misc.Bouton(280, 435, b_button_img, 1)
@@ -495,11 +515,9 @@ intégré comporte généralement plusieurs portes à la fois."""
                 COURS_STATE = 'xnor'
                 clicked = True
 
-            light_bool = True
-
             if light_bool:
 
-                light_off.afficher(screen)
+                light_on.afficher(screen)
 
          # Onglet "xnor"
 
@@ -509,19 +527,27 @@ intégré comporte généralement plusieurs portes à la fois."""
 
             com.Affichage.afficher(screen, XNORgate_img, XNORgate_rectangle, 1)
 
+            light_bool = True
+
             keys = pygame.key.get_pressed()
 
             if keys[pygame.K_a] and keys[pygame.K_b]:
                   
-                light_bool = False
+                light_bool = True
                 light_on.afficher(screen)
 
             if keys[pygame.K_a]:
+
+                light_bool = False
+                light_off.afficher(screen)
 
                 a_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_a_pressed.png')
                 a_button = misc.Bouton(280, 300, a_button_img, 1)
 
             if keys[pygame.K_b]:
+
+                light_bool = False
+                light_off.afficher(screen)
 
                 b_button_img = com.Affichage.chargementFichier('./graphics/buttons/circuit_buttons/button_b_pressed.png')
                 b_button = misc.Bouton(280, 435, b_button_img, 1)
@@ -546,6 +572,10 @@ intégré comporte généralement plusieurs portes à la fois."""
 
                 COURS_STATE = 'resume'
                 clicked = True
+
+            if light_bool:
+
+                light_on.afficher(screen)
 
         # Onglet "resume"
 
