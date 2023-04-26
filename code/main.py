@@ -24,10 +24,7 @@ title_surface = com.Affichage.creerTexte(Nexa, 'Apprends les portes logiques !',
 title_rectangle = com.Collision.creerRectangle(title_surface, 'center', (640, 160))
 
 cours_surface = com.Affichage.creerTexte(Nexa, "Les portes logiques c'est quoi ?", True, 'black')
-cours_rectangle = com.Collision.creerRectangle(cours_surface, 'center', (640, 160))
-
-cours_contenu_surface = com.Affichage.creerTexte(Nexa, 'Une porte logique (gate) est un circuit électronique réalisant des opérations logiques (booléennes) sur une séquence de bits. Cette séquence est donnée par un signal d"'"entrée modulé en créneau (signal carré), et cadencé de façon précise par un circuit d'horloge, ou quartz. Les opérations logiques sont réalisées électriquement par une combinaison de bascules ou inverseurs, à base de transistors. Étant donné les capacités d"'"intégration en électronique, un circuit intégré comporte généralement plusieurs portes à la fois4.', True, 'black')
-cours_contenu_rectangle = com.Collision.creerRectangle(cours_contenu_surface, 'center', (640, 260))
+cours_rectangle = com.Collision.creerRectangle(cours_surface, 'center', (640, 120))
 
 and_surface = com.Affichage.creerTexte(Nexa, 'AND', True, 'black')
 and_rectangle = com.Collision.creerRectangle(and_surface, 'center', (640, 160))
@@ -117,6 +114,10 @@ XORgate_img = com.Affichage.chargementFichier('./graphics/gates/XORgate.png')
 XORgate_img = com.Affichage.redimensionner(XORgate_img, 0.325)
 XORgate_rectangle = com.Collision.creerRectangle(XORgate_img, 'center', (640, 360))
 
+# Portes logique menu circuit
+
+ANDgate = ANDgate
+
 # Lumières
 
 light_on = misc.Light(1025, 360,'./graphics/lights/light-bulb-on.png', 0.1)
@@ -130,7 +131,7 @@ light_group.add(light_on, light_off)
 # Circuit
 
 
-blank_circuit_menu_surface = pygame.Surface([150, 720])
+blank_circuit_menu_surface = pygame.Surface([300, 720])
 blank_circuit_menu_surface.fill('white')
 blank_circuit_menu_surface.set_alpha(125)
 
@@ -177,17 +178,32 @@ while run:
 
     if SYSTEM_STATE == 'cours':
 
-        if retour_button.afficher(screen) == True:
-
-            SYSTEM_STATE = 'main'
-            COURS_STATE = 'cours_un'
+        
 
     # Onglet "cours_un"
 
         if COURS_STATE == 'cours_un':
+    
 
             com.Affichage.afficher(screen, cours_surface, cours_rectangle, 1)
-            com.Affichage.afficher(screen, cours_contenu_surface, cours_contenu_rectangle, 1)
+            
+            phrase_cours = """Une porte logique (gate) est un circuit électronique réalisant
+des opérations logiques (booléennes) sur une séquence de bits. 
+Cette séquence est donnée par un signal d'entrée modulé en créneau 
+(signal carré) et cadencé de façon précise par un circuit d'horloge, 
+ou quartz. Les opérations logiques sont réalisées électriquement par 
+une combinaison de bascules ou inverseurs, à base de transistors.
+Étant donné les capacités d'intégration en électronique, un circuit 
+intégré comporte généralement plusieurs portes à la fois."""
+
+            phrase_cours_rectangle = com.Collision.creerRectangle(screen, 'center', (125, 220))
+
+            x, y =phrase_cours_rectangle.center
+
+            for ligne in phrase_cours.splitlines():
+
+                x,y = screen.blit(Nexa.render(ligne, 1, "black"), (x,y)).bottomleft
+ 
 
             if fleche_de_droite_button.afficher(screen) == True and clicked == False:
                 clicked = True
@@ -525,6 +541,11 @@ while run:
 
                 light_off.afficher(screen)
 
+        if retour_button.afficher(screen) == True:
+
+            SYSTEM_STATE = 'main'
+            COURS_STATE = 'cours_un'
+
     # Menu circuit
 
     if SYSTEM_STATE == 'circuit':
@@ -538,7 +559,7 @@ while run:
             
         if not fleche_bool:
 
-            com.Affichage.afficher(screen, blank_circuit_menu_surface, (1130, 0), 1)
+            com.Affichage.afficher(screen, blank_circuit_menu_surface, (980, 0), 1)
 
             if fleche_droite_menu_circuit.afficher(screen) == True:
 
@@ -552,6 +573,16 @@ while run:
     # Menu à propos
 
     if SYSTEM_STATE == 'propos':
+
+        phrase_propos = """'Apprends les portes logiques !' est un projet réalisé dans
+le cadre des trophées NSI."""
+
+        phrase_propos_rectangle = com.Collision.creerRectangle(screen, 'center', (100, 150))
+        x, y = phrase_propos_rectangle.center
+
+        for ligne in phrase_propos.splitlines():
+
+            x,y = screen.blit(Nexa.render(ligne, 1, "black"), (x,y)).bottomleft
 
         if retour_button.afficher(screen) == True:
      
