@@ -1,6 +1,6 @@
 import pygame, sys #Importation des modules
 import commands as com
-import misc
+import misc, gates
 
 #-----------------------------[ Initialisation ]------------------
 
@@ -116,7 +116,13 @@ XORgate_rectangle = com.Collision.creerRectangle(XORgate_img, 'center', (640, 36
 
 # Portes logique menu circuit
 
-
+ANDgate = gates.ANDgate(1200, 50, 0.1)
+NANDgate = gates.NANDgate(1200, 150, 0.08)
+NORgate = gates.NORgate(1200, 250, 0.08)
+NOTgate = gates.NOTgate(1200, 350, 0.05)
+ORgate = gates.ORgate(1200, 450, 0.1)
+XNORgate = gates.XNORgate(1200, 550, 0.1)
+XORgate = gates.XORgate(1200, 650, 0.05)
 
 # Lumières
 
@@ -582,6 +588,14 @@ intégré comporte généralement plusieurs portes à la fois."""
         if not fleche_bool:
 
             com.Affichage.afficher(screen, blank_circuit_menu_surface, (980, 0), 1)
+
+            ANDgate.afficher(screen)
+            NANDgate.afficher(screen)
+            NORgate.afficher(screen)
+            NOTgate.afficher(screen)
+            ORgate.afficher(screen)
+            XNORgate.afficher(screen)
+            XORgate.afficher(screen)
 
             if fleche_droite_menu_circuit.afficher(screen) == True:
 
